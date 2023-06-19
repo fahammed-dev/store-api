@@ -7,9 +7,11 @@ const morgan = require('morgan');
 const notFound = require('../middlewares/notFound.middleware');
 const handleError = require('../middlewares/error.middleware');
 const healthRoute = require('../routes/health.route');
+const productsRoute = require('../routes/products.route');
 
 // configuration
 require('dotenv').config();
+require('express-async-errors');
 const app = express();
 
 // middleware
@@ -18,7 +20,8 @@ app.use(cors());
 app.use(express.json());
 
 // routes
-app.get('/health', healthRoute);
+app.use('/health', healthRoute);
+app.use('/api/v1/products', productsRoute);
 
 // error middleware
 app.use(notFound);
