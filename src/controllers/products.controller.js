@@ -13,9 +13,17 @@ const getAllProducts = async (req, res) => {
   if (company) {
     queryObject.company = company;
   }
+  /**
+   * How apply regex on mongoDB
+   * Doc: https://www.mongodb.com/docs/manual/reference/operator/query/regex/
+   */
   if (name) {
     queryObject.name = { $regex: name, $options: 'i' }; //regex
   }
+  /**
+   * How to apply mumeric filter
+   * Doc: https://mongoosejs.com/docs/queries.html
+   */
   if (numericFilters) {
     const operatorMap = {
       '>': '$gt',
